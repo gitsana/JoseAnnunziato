@@ -1,0 +1,8 @@
+package edu.jose.rest.model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Movie {
+
+}

@@ -1,0 +1,5 @@
+package edu.jose.orm.dao;
+
+public class MovieDAO {
+
+}

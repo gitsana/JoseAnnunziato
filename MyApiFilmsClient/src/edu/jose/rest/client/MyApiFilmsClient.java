@@ -1,0 +1,112 @@
+package edu.jose.rest.client;
+
+import java.io.BufferedReader;
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.InputStreamReader;
+import java.net.HttpURLConnection;
+import java.net.URL;
+import java.net.URLEncoder;
+
+import com.fasterxml.jackson.core.JsonParseException;
+import com.fasterxml.jackson.databind.JsonMappingException;
+import com.fasterxml.jackson.databind.ObjectMapper;
+
+public class MyApiFilmsClient {
+
+	// the URL from myapifilms.com
+	private final String FIND_MOVIE_BY_TITLE = "http://www.myapifilms.com/imdb?title=MOVIE_TITLE&format=JSON&aka=0&business=0&seasons=0&seasonYear=0&technical=0&filter=N&exactFilter=0&limit=10&forceYear=0&lang=en-us&actors=N&biography=0&trailer=0&uniqueName=0&filmography=0&bornDied=0&starSign=0&actorActress=0&actorTrivia=0&movieTrivia=0&awards=0&moviePhotos=N&movieVideos=N&similarMovies=0&adultSearch=0";
+	private final String FIND_MOVIE_BY_IMDB_ID = "http://www.myapifilms.com/imdb?idIMDB=IMDB_ID&format=JSON&aka=0&business=0&seasons=0&seasonYear=0&technical=0&lang=en-us&actors=N&biography=0&trailer=0&uniqueName=0&filmography=0&bornDied=0&starSign=0&actorActress=0&actorTrivia=0&movieTrivia=0&awards=0&moviePhotos=N&movieVideos=N&similarMovies=0";
+	
+	// returns a single movie by unique identifier imdbId
+	public Movie findMovieByImdbId(String imdbId) {
+		String urlStr = FIND_MOVIE_BY_IMDB_ID.replace("IMDB_ID", imdbId);
+		String jsonStr = getJsonStringForUrl(urlStr);
+		ObjectMapper objectMapper = new ObjectMapper(); // from Jackson, to map
+		Movie movie = new Movie();
+		try {
+			movie = objectMapper.readValue(jsonStr, Movie.class); // Jackson
+		} catch (JsonParseException e) {
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			e.printStackTrace();
+		} catch (IOException e) {
+			e.printStackTrace();
+		}
+		//System.out.println(getJsonStringForUrl(urlStr));
+		return movie;
+	}
+		
+	// returns an array of movies
+	public Movie[] findMovieByTitle(String title) {
+		// need to encode because possible spaces in the movie title can break the API 
+		title = URLEncoder.encode(title);
+		String urlStr = FIND_MOVIE_BY_TITLE.replace("MOVIE_TITLE", title);		
+		String jsonStr = getJsonStringForUrl(urlStr);
+		ObjectMapper objectMapper = new ObjectMapper();
+		try {
+			return objectMapper.readValue(jsonStr, Movie[].class);
+		} catch (JsonParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (JsonMappingException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+
+	// function to connect to this URL and retrieve data from the URL
+	private String getJsonStringForUrl(String urlStr) {
+		try {
+			// URL is Java class that allows us to manipulate/interact with a URL, such as to open up a connection and retrieve whatever that URL maps to
+			URL url = new URL(urlStr); // needs to be surrounded with try-catch block
+			HttpURLConnection httpUrlConnection = (HttpURLConnection) url.openConnection(); // url is generic connection, need it to be Http connection, so creating it here
+			httpUrlConnection.setRequestMethod("GET"); // tell it we want this connection to do GETs, as opposed to POST, PUT, DELETE, etc
+			// now ready to actually send this request and get back stuff
+			// start streaming data back to me
+			InputStream inputStream = httpUrlConnection.getInputStream();
+			// a lot of info, start buffering as it comes
+			// wrap it as it comes
+			InputStreamReader inputStreamReader = new InputStreamReader(inputStream);
+			BufferedReader bufferedReader = new BufferedReader(inputStreamReader);
+			String out;
+			StringBuffer jsonStringBuffer = new StringBuffer();
+			while((out = bufferedReader.readLine()) != null) {
+				//System.out.println(out); // gives JSON string response coming back from myapifilms service
+				jsonStringBuffer.append(out);
+			}
+			return jsonStringBuffer.toString();
+		} catch (IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+		return null;
+	}
+	
+	// main
+	public static void main(String[] args) {
+		
+		MyApiFilmsClient client = new MyApiFilmsClient();
+		
+		String movieTitle = "back to the future";
+		String idImdb = "tt0417299";
+		
+		// find movie by TITLE (array of movies)
+		System.out.println("*** Finding ARRAY of movies by title ***");
+		Movie[] movies = client.findMovieByTitle(movieTitle);
+		for(Movie m : movies) {
+			System.out.println(m.getTitle() + "\t|\t" + m.getIdIMDB());
+		}
+		
+		// find movie by IDIMDB
+		System.out.println("\n^^^ Finding single movie by unique identifier idImdb ^^^");
+		Movie movie = client.findMovieByImdbId(idImdb);
+		System.out.println(movie.getTitle());
+		
+	}// end main
+
+}// end class

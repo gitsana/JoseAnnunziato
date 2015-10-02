@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>All Movies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+<script src="jquery/jquery-1.11.3.js"></script>
+
+<h3>All Movies</h3>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Plot</th>
+		<th>URL Poster</th>
+		<th>IMDB ID</th>
+	</tr>
+	<tr>
+		<td><input class="form-control" name="newtitle"></td>
+		<td><input class="form-control" name="newplot"></td>
+		<td><input class="form-control" name="newurlposter"></td>
+		<td><input class="form-control" name="newimdbid"></td>
+	</tr>
+</table>
+</body>
+</html>

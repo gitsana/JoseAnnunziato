@@ -1,0 +1,20 @@
+package edu.jose.rest.client;
+
+public class MyApiFilmsClient {
+
+	// the URL from myapifilms.com
+	public final String FIND_MOVIE_BY_TITLE = "http://www.myapifilms.com/imdb?title=MOVIE_TITLE&format=JSON&aka=0&business=0&seasons=0&seasonYear=0&technical=0&filter=N&exactFilter=0&limit=10&forceYear=0&lang=en-us&actors=N&biography=0&trailer=0&uniqueName=0&filmography=0&bornDied=0&starSign=0&actorActress=0&actorTrivia=0&movieTrivia=0&awards=0&moviePhotos=N&movieVideos=N&similarMovies=0&adultSearch=0";
+	
+	// function to connect to this URL and retrieve data from the URL
+	public void findMovieByTitle(String title) {
+		String urlStr = FIND_MOVIE_BY_TITLE.replace("MOVIE_TITLE", title);
+		System.out.println(urlStr);
+	}
+	
+	// main
+	public static void main(String[] args) {
+		MyApiFilmsClient client = new MyApiFilmsClient();
+		client.findMovieByTitle("avatar");
+	}// end main
+
+}// end class

@@ -1,0 +1,67 @@
+$(document).ready(function() {
+	// hard-coded
+	var movie = [{ title: "Godfather", plot: "Mafia people", urlposter: "gf url poster", imdbid: "tt0068646" },
+	              { title: "Peter Pan", plot: "PP PLOT", urlposter: "pan url poster", imdbid: "tt0316396" },
+	              { title: "Sound of Music", plot: "S.O.M. PLOT", urlposter: "SOM url poster", imdbid: "tt0059742" } ];
+	
+	// request from API		
+	$.ajax({
+			url: "/MyRestfulService/rest/movie",
+			type: "get", // by default it's get unless specified
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(movie),
+			success: function(data) {
+				console.log("*** Jquery success in GET ***" );				
+				var i = 0;
+				$.each(data, function(i){
+					$("#movietable").last().append("<tr><td>" + data[i].title + "</td><td>" + data[i].plot + 
+							"</td><td>" + data[i].urlPoster + "</td><td>" + data[i].imdbId + "</td></tr>");
+					i += 1;
+				});
+				
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("*** ERROR: jqXHR = " + jqXHR + ", textStatus = " + textStatus
+						+ ", errorThrown = " + errorThrown)
+			}
+		}); // end of ajax request for all movies
+	
+	$.each(movie, function(key, value){
+		$("#movietable").last().append("<tr><td>" + value.title + "</td><td>" + value.plot + 
+				"</td><td>" + value.urlposter + "</td><td>" + value.imdbid + "</td></tr>");
+	}); // end for .each movie
+	
+	$("#addButton").click(function(){
+		var newTitle = $("#newtitle").val();
+		var newPlot = $("#newplot").val();
+		var newUrlPoster = $("#newurlposter").val();
+		var newImdbId = $("#newimdbid").val();
+		
+		$("#div1").append(newTitle + " " + newPlot + " " + newUrlPoster + " " + newImdbId); // test
+		var movieObj = {title: newTitle, plot: newPlot, urlPoster: newUrlPoster, imdbId: newImdbId};
+		$("#div1").append("<br>END");
+		
+		// create the movie in the DB
+		$.ajax({
+			url: "/MyRestfulService/rest/movie",
+			type: "post", // by default it's get unless specified
+			contentType: "application/json",
+			dataType: "json",
+			data: JSON.stringify(movieObj),
+			success: function(response) {
+				console.log("*** Jquery success in POST ***");
+				$("#newtitle").val("");
+				$("#newplot").val("");
+				$("#newurlposter").val("");
+				$("#newimdbid").val("");
+				alert("Your new movie was added. Title: " + movieObj.title);
+			},
+			error: function(jqXHR, textStatus, errorThrown) {
+				console.log("*** ERROR: jqXHR = " + jqXHR + ", textStatus = " + textStatus
+						+ ", errorThrown = " + errorThrown)
+			}
+		});
+	});
+	
+}); // end document.ready

@@ -1,0 +1,97 @@
+package edu.jose.orm.model;
+
+import java.util.List;
+
+import javax.persistence.CascadeType;
+import javax.persistence.Entity;	// all JPA interface standards under here; EclipseLink implements all those interfaces
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
+import javax.persistence.Id;
+import javax.persistence.OneToMany;
+import javax.persistence.Table;
+
+@Entity // says this class maps to a schema in the DB (persistence.xml)
+@Table(schema = "orm", name = "movie")
+public class Movie {
+	@Id	// says this is the primary key ID
+	@GeneratedValue(strategy = GenerationType.IDENTITY) // it generates the ID itself
+	private Integer id;
+	private String title;
+	private String plot;
+	private String urlPoster;
+	private String imdbId;	
+	@OneToMany(mappedBy = "movie", cascade = CascadeType.ALL)	// need to tell JPA movie is participating on the ONE side, and actor on the MANY side, should be populated by all actors that refence me					
+	private List<Actor> actors;
+	
+	public Movie() {
+		super();
+	}
+
+	public Movie(Integer id, String title, String plot, String urlPoster,
+			String imdbId) {
+		super();
+		this.id = id;
+		this.title = title;
+		this.plot = plot;
+		this.urlPoster = urlPoster;
+		this.imdbId = imdbId;
+	}
+	
+	public Movie(String title, String plot, String urlPoster, String imdbId) {
+		super();		
+		this.title = title;
+		this.plot = plot;
+		this.urlPoster = urlPoster;
+		this.imdbId = imdbId;
+	}
+
+	public Integer getId() {
+		return id;
+	}
+
+	public void setId(Integer id) {
+		this.id = id;
+	}
+
+	public String getTitle() {
+		return title;
+	}
+
+	public void setTitle(String title) {
+		this.title = title;
+	}
+
+	public String getPlot() {
+		return plot;
+	}
+
+	public void setPlot(String plot) {
+		this.plot = plot;
+	}
+
+	public String getUrlPoster() {
+		return urlPoster;
+	}
+
+	public void setUrlPoster(String urlPoster) {
+		this.urlPoster = urlPoster;
+	}
+
+	public String getMovieId() {
+		return imdbId;
+	}
+
+	public void setMovieId(String movieId) {
+		this.imdbId = movieId;
+	}
+
+	public List<Actor> getActors() {
+		return actors;
+	}
+
+	public void setActors(List<Actor> actors) {
+		this.actors = actors;
+	}
+	
+	
+}

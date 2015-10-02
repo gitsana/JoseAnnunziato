@@ -1,0 +1,20 @@
+package edu.jose.rest.service;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+
+@Path("/hello") // after the /rest/ (in web.xml mapping), if what follow is "hello", it's this class
+public class Hello {
+	
+	@GET
+	@Path("/world")
+	public String sayHello() {
+		return "Hello world!";
+	}
+	
+	@GET
+	@Path("/goodbye")
+	public String sayGoodbye() {
+		return "Goodbye world!";
+	}
+}

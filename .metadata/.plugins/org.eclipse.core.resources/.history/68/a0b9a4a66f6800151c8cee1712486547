@@ -1,0 +1,5 @@
+package edu.jose.rest.model;
+
+public class Movie {
+
+}

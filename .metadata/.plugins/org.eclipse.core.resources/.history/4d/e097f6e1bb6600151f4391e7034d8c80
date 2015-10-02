@@ -1,0 +1,77 @@
+<%@ page language="java" contentType="text/html; charset=ISO-8859-1"
+    pageEncoding="ISO-8859-1" import="edu.jose.orm.dao.*, edu.jose.orm.model.*, java.util.*"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=ISO-8859-1">
+<title>Movie Details</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<%
+		MovieDAO movieDAO = new MovieDAO();
+	
+		String idStr = request.getParameter("id");
+		System.out.println("*** idStr = " + idStr);
+		Integer id = Integer.parseInt(idStr);
+		String actorFirstName = request.getParameter("firstname");
+		String actorLastName = request.getParameter("lastname");
+		
+		String action = request.getParameter("action");
+		
+		if("add".equals(action)) {
+			Actor actor = new Actor(actorFirstName, actorLastName, new Date());
+			movieDAO.addActor(id, actor);
+		}	
+		else if ("delete".equals(action)) {
+			String actorId = request.getParameter("actorid");
+			Integer intActorId = Integer.parseInt(actorId);
+			movieDAO.deleteActor(intActorId);
+		}
+		
+		Movie movie = movieDAO.readMovieById(id);
+	%>
+	<div class="container">
+		<h2>Movie: <%= movie.getTitle() %>, movie's ID : <%= id %></h2>
+		<a href="Movies.jsp">Back to All Movies</a>
+		<h3>Actors</h3>
+		<form action="">
+			<input type="hidden" name="id" value="<%= idStr %>">
+		<table class="table table-striped">
+			<thead>
+				<tr>
+					<th>First Name</th>
+					<th>Last Name</th>
+					<th>Date of Birth</th>
+				</tr>
+			</thead>
+			<tbody>
+			<tr>
+				<td><input name="firstname" class="form-control"></td>
+				<td><input name="lastname" class="form-control"></td>
+				<td><input name="dob" class="form-control"></td>
+				<td><button class="btn btn-primary" type="submit" name="action" value="add">Add Actor</button></td>
+				<!-- <td><button class="btn btn-primary" type="submit" name="action" value="create">Create</button></td> -->
+			</tr>
+			<%
+			List<Actor> actors = movie.getActors();
+			System.out.println("^^^Size of actor list: " + movie.getActors().size());
+			for(Actor actor : actors) {
+				%>
+				<tr>
+					<td><%=actor.getFirstname() %></td>
+					<td><%=actor.getLastname() %></td>
+					<td><%=actor.getDob() %></td>
+					<td><a class="btn btn-danger" href="MovieDetails.jsp?action=delete&actorid=<%= actor.getId() %>&id=<%= idStr%>">Remove Actor</a></td>
+					<!-- <td>&nbsp;</td> -->
+				</tr>
+				<%
+			}
+			%>
+				
+			</tbody>
+		</table>
+		</form>
+	</div>
+</body>
+</html>

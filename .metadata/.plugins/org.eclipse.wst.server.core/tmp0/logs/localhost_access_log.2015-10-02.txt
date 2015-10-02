@@ -1,0 +1,6 @@
+127.0.0.1 - - [02/Oct/2015:11:03:46 -0700] "GET / HTTP/1.1" 404 994
+0:0:0:0:0:0:0:1 - - [02/Oct/2015:11:04:13 -0700] "GET /MyRestfulService/movies.html HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [02/Oct/2015:11:04:13 -0700] "GET /MyRestfulService/javascript/allMovies.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [02/Oct/2015:11:04:13 -0700] "GET /MyRestfulService/jquery/jquery-1.11.3.js HTTP/1.1" 304 -
+0:0:0:0:0:0:0:1 - - [02/Oct/2015:11:04:16 -0700] "GET /MyRestfulService/rest/movie?[{%22title%22:%22Godfather%22,%22plot%22:%22Mafia%20people%22,%22urlposter%22:%22gf%20url%20poster%22,%22imdbid%22:%22tt0068646%22},{%22title%22:%22Peter%20Pan%22,%22plot%22:%22PP%20PLOT%22,%22urlposter%22:%22pan%20url%20poster%22,%22imdbid%22:%22tt0316396%22},{%22title%22:%22Sound%20of%20Music%22,%22plot%22:%22S.O.M.%20PLOT%22,%22urlposter%22:%22SOM%20url%20poster%22,%22imdbid%22:%22tt0059742%22}] HTTP/1.1" 200 1588
+0:0:0:0:0:0:0:1 - - [02/Oct/2015:11:04:53 -0700] "POST /MyRestfulService/rest/movie HTTP/1.1" 204 -

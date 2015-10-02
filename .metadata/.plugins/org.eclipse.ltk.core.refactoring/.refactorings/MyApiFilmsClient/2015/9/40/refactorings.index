@@ -1,0 +1,6 @@
+1443641348815	Extract method 'getJsonStringForUrl'
+1443641996804	Rename field 'FIND_MOVIE_BY_ID'
+1443642020121	Rename local variable 'id'
+1443642029937	Rename method 'findMovieById'
+1443644416009	Rename field 'idImdb'
+1443644430871	Rename method 'getIdImdb'

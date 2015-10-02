@@ -1,0 +1,5 @@
+package edu.jose.rest.service;
+
+public class MovieService {
+
+}

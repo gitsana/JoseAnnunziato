@@ -1,0 +1,52 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>All Movies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<style>
+	table,th,td {
+		border: 1px solid black;
+	    border-collapse: collapse;
+		font-size: .98em;
+		padding: 3px;
+	}
+</style>
+<body>
+
+
+<h3>All Movies</h3>
+<table id="movietable">
+	<tr>
+		<th>Title</th>
+		<th>Plot</th>
+		<th>URL Poster</th>
+		<th>IMDB ID</th>
+	</tr>
+</table>
+
+<h3>Add a New Movie</h3>
+<table>
+	<tr>
+		<th>Title</th>
+		<th>Plot</th>
+		<th>URL Poster</th>
+		<th>IMDB ID</th>
+	</tr>
+	<tr>
+		<td><input class="form-control" name="newtitle"></td>
+		<td><input class="form-control" name="newplot"></td>
+		<td><input class="form-control" name="newurlposter"></td>
+		<td><input class="form-control" name="newimdbid"></td>
+	</tr>
+</table>
+<button class="btn btn-primary" name="addButton">Add New</button>
+
+<div id="div1"></div>
+
+<script src="jquery/jquery-1.11.3.js"></script>
+<script src="javascript/allMovies.js"></script>
+
+</body>
+</html>

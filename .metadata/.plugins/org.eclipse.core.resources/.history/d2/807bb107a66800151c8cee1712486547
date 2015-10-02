@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>All Movies</title>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<style>
+table,th,td {
+	border: 1px solid black;
+    border-collapse: collapse;
+	font-size: .98em;
+	padding: 3px;
+}
+</style>
+<body>
+<script src="jquery/jquery-1.11.3.js"></script>
+
+<h3>All Movies</h3>
+<table id="movietable">
+	<tr>
+		<th>Title</th>
+		<th>Plot</th>
+		<th>URL Poster</th>
+		<th>IMDB ID</th>
+	</tr>
+</table>
+<script type="text/javascript">
+	$(document).ready(function() {
+		var movie = [{ title: "Godfather", plot: "Mafia people", urlposter: "gf url poster", imdbid: "tt0068646" },
+		              { title: "Peter Pan", plot: "PP PLOT", urlposter: "pan url poster", imdbid: "tt0316396" }];
+		
+		$.each(movie, function(key, value) {
+			$("#movietable").last().append("<tr><td>" + value.title + "</td><td>" + value.plot + 
+					"</td><td>" + value.urlposter + "</td><td>" + value.imdbid + "</td></tr>");
+		)};
+		
+	});
+
+</script>
+
+</body>
+</html>

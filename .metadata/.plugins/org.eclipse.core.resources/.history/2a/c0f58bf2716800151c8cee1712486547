@@ -1,0 +1,5 @@
+package edu.jose.rest.dao;
+
+public class MovieDAO {
+
+}

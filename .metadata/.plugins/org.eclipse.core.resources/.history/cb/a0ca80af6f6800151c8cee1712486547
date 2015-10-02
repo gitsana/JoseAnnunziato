@@ -1,0 +1,6 @@
+package edu.jose.rest.model;
+
+@Entity
+public class Movie {
+
+}

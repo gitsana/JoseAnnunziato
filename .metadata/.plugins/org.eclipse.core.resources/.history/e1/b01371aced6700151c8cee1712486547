@@ -1,0 +1,40 @@
+package edu.jose.rest.service;
+
+import javax.ws.rs.GET;
+import javax.ws.rs.Path;
+import javax.ws.rs.PathParam;
+
+@Path("/hello") // after the /rest/ (in web.xml mapping), if what follow is "hello", it's this class
+public class Hello {
+	
+	@GET
+	@Path("/world")
+	public String sayHello() {
+		return "Hello world!";
+	}
+	
+	@GET
+	@Path("/goodbye")
+	public String sayGoodbye() {
+		return "Goodbye world!";
+	}
+	
+	@GET
+	@Path("/")
+	public String rootSayHello() {
+		return "Hello world FROM THE ROOT!";
+	}
+	
+	@GET
+	@Path("/message/{theMessage}")
+	public String sayMessage(@PathParam("theMessage") String message1) {
+		return "Hello " + message1;
+	}
+	
+	@GET
+	@Path("/add/{a}/{b}") // will try to parse it into the correct data types
+	public Integer addValues(@PathParam("a") int A, @PathParam("b") int B) {
+		//return "The sum is: " + (A + B);
+		return (A + B);
+	}
+}

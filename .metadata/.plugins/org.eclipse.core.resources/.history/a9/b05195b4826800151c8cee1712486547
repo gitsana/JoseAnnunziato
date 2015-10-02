@@ -1,0 +1,56 @@
+<%@ page language="java" contentType="text/html; charset=UTF-8"
+    pageEncoding="UTF-8"%>
+<!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
+<html>
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<title>Movie Post Test</title>
+<script src="jquery/jquery-1.11.3.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+</head>
+<body>
+	<h2>Reading from JSP file</h2>
+	<h3>Add a new movie into the database</h3>
+	<table>
+		<tr>
+			<td>Title</td><td></td>
+		</tr>
+		<tr>
+			<td>Plot</td><td></td>
+		</tr>
+		<tr>
+			<td>UrlPoster</td><td></td>
+		</tr>
+		<tr>
+			<td>ImdbId</td><td></td>
+		</tr>
+	</table>
+	<button class="btn btn-primary">Add Movie</button>
+	<script>
+		$(function() {
+			alert("Hello from jquery");
+			var movie = {
+					title: "Apollo 13",
+					plot: "Going to space",
+					urlPoster: "apollo url poster",
+					imdbId: "tt0112384"
+			};
+			
+			$.ajax({
+				url: "/MyRestfulService/rest/movie",
+				type: "post", // by default it's get unless specified
+				contentType: "application/json",
+				dataType: "json",
+				data: JSON.stringify(movie),
+				success: function(response) {
+					console.log("*** Jquery success ***");
+				},
+				error: function(jqXHR, textStatus, errorThrown) {
+					console.log("*** ERROR: jqXHR = " + jqXHR + ", textStatus = " + textStatus
+							+ ", errorThrown = " + errorThrown)
+				}
+			});
+		})
+	</script>
+</body>
+</html>

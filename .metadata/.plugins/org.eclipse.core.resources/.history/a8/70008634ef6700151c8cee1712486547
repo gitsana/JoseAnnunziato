@@ -1,0 +1,16 @@
+package edu.jose.rest.service;
+
+public class HelloMessage {
+
+	private String message;
+	private int size;
+	
+	public HelloMessage() {		
+	}
+	
+	public HelloMessage(String message, int size) {
+		this.message = message;
+		this.size = size;
+	}
+	
+}

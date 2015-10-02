@@ -1,0 +1,12 @@
+package edu.jose.rest.model;
+
+import javax.persistence.Entity;
+
+@Entity
+public class Movie {
+	private int id;
+	private String title;
+	private String plot;
+	private String urlPoster;
+	private String imdbId;
+}

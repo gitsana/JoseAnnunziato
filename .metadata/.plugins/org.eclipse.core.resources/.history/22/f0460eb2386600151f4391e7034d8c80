@@ -1,0 +1,5 @@
+package edu.jose.orm.model;
+
+public class Movie {
+
+}

@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>All Movies</title>
+</head>
+<body>
+<script src="jquery/jquery-1.11.3.js"></script>
+<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<h3>All Movies</h3>
+<table>
+	<tr><th>Title</th></tr>
+	<tr><th>Plot</th></tr>
+	<tr><th>URLPoster</th></tr>
+	<tr><th>IMDB ID</th></tr>
+</table>
+</body>
+</html>

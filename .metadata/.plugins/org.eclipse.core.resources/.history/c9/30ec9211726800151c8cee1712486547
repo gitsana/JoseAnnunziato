@@ -1,0 +1,10 @@
+package edu.jose.rest.dao;
+
+import javax.persistence.EntityManager;
+import javax.persistence.EntityManagerFactory;
+import javax.persistence.Persistence;
+
+public class MovieDAO {
+	EntityManagerFactory entityManagerFactory = Persistence.createEntityManagerFactory("MyRestfulService");
+	EntityManager entityManager = entityManagerFactory.createEntityManager();
+}
